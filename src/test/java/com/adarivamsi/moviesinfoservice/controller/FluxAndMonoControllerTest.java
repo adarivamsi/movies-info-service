@@ -42,7 +42,7 @@ class FluxAndMonoControllerTest {
                 .getResponseBody();
 
         StepVerifier.create(flux)
-                .expectNext(1,2,3)
+                .expectNext(1, 2, 3)
                 .verifyComplete();
     }
 
@@ -74,5 +74,22 @@ class FluxAndMonoControllerTest {
                     var responseBody = stringEntityExchangeResult.getResponseBody();
                     assertEquals("Hi Vamsi!", responseBody);
                 });
+    }
+
+    @Test
+    void stream() {
+        var flux = webTestClient.
+                get()
+                .uri("/stream")
+                .exchange()
+                .expectStatus()
+                .is2xxSuccessful()
+                .returnResult(Long.class)
+                .getResponseBody();
+
+        StepVerifier.create(flux)
+                .expectNext(0L, 1L, 2L, 3L)
+                .thenCancel()
+                .verify();
     }
 }

@@ -60,4 +60,19 @@ class FluxAndMonoControllerTest {
                     assert (Objects.requireNonNull(responseBody).size() == 3);
                 });
     }
+
+    @Test
+    void mono() {
+        webTestClient.
+                get()
+                .uri("/mono")
+                .exchange()
+                .expectStatus()
+                .is2xxSuccessful()
+                .expectBody(String.class)
+                .consumeWith(stringEntityExchangeResult -> {
+                    var responseBody = stringEntityExchangeResult.getResponseBody();
+                    assertEquals("Hi Vamsi!", responseBody);
+                });
+    }
 }

@@ -1,0 +1,31 @@
+spring:
+  profiles:
+    active: local
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - local
+  data:
+    mongodb:
+      uri: mongodb+srv://adarivamsiai:Rzqv53pwcjGjFPi2@developmentcluster.hxvzo1n.mongodb.net/test?retryWrites=true&w=majority
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - non-prod
+  data:
+    mongodb:
+      uri: mongodb+srv://adarivamsiai:Rzqv53pwcjGjFPi2@developmentcluster.hxvzo1n.mongodb.net/local?retryWrites=true&w=majority
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - prod
+  data:
+    mongodb:
+      uri: mongodb+srv://adarivamsiai:Rzqv53pwcjGjFPi2@developmentcluster.hxvzo1n.mongodb.net/local?retryWrites=true&w=majority
